@@ -3,7 +3,7 @@ import {Pokemon} from "../../shared/interfaces/global";
 import {from, iif, Observable, of, Subject} from "rxjs";
 import {PokemonService, TypePokemon} from "../../shared/service/pokemon.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {concatMap, debounceTime, filter, startWith, switchMap, takeUntil, tap} from "rxjs/operators";
+import {concatMap, debounceTime, startWith, switchMap, takeUntil, tap} from "rxjs/operators";
 import {EditPokemonComponent} from "../modals/edit-pokemon/edit-pokemon.component";
 import {NotificacionService} from "../../shared/service/notificacion.service";
 
@@ -12,7 +12,11 @@ import {NotificacionService} from "../../shared/service/notificacion.service";
   templateUrl: './listado.component.html',
   styles: [`
     tr.loading {
-      height: 60px;
+      //height: 60px;
+    }
+
+    .img-loading {
+      height: 250px;
     }
   `]
 })
