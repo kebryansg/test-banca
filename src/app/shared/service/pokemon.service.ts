@@ -16,11 +16,15 @@ export class PokemonService {
   }
 
   ObtenerPokemons(): Observable<Pokemon[]> {
-    return this.crudService.get('', {idAuthor: 1})
+    return this.crudService.get('pokemons', {})
   }
 
   ObtenerPokemonById(idPokemon: number): Observable<Pokemon> {
     return this.crudService.get(`pokemons/${idPokemon}`)
+  }
+
+  ObtenerPokemonByType(type: TypePokemon): Observable<Pokemon[]> {
+    return this.crudService.get(`pokemons`, {type})
   }
 
   CrearPokemon(data: Pokemon) {
@@ -45,3 +49,5 @@ export class PokemonService {
     ]
   }
 }
+
+export type TypePokemon = 'water' | 'fire' | 'normal' | 'bug' | 'poison'

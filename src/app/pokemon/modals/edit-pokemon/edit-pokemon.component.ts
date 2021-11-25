@@ -33,8 +33,10 @@ export class EditPokemonComponent implements OnInit {
       id: [0, Validators.required],
       name: ['', Validators.required],
       image: ['', Validators.required],
-      attack: [0, Validators.required],
-      defense: [0, Validators.required],
+      hp: [0, [Validators.required, Validators.min(1)]],
+      attack: [0, [Validators.required, Validators.min(1)]],
+      defense: [0, [Validators.required, Validators.min(1)]],
+      idAuthor: [1, Validators.required],
       type: ['', Validators.required],
     })
     this.setearDatos()
@@ -47,6 +49,7 @@ export class EditPokemonComponent implements OnInit {
       .subscribe(pokemon =>
         this.itemForm.patchValue({
           id: pokemon.id,
+          hp: pokemon.hp,
           name: pokemon.name,
           image: pokemon.image,
           attack: pokemon.attack,

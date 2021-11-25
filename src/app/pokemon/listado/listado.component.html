@@ -4,10 +4,14 @@
     <div class="col-md-12 d-flex justify-content-between align-content-between">
       <div class="d-flex flex-row">
         <input class="form-control"
+               #txtSearch
                placeholder="Buscar"
                style="width: 220px"
+               (keyup.enter)="keyUpEnter($event)"
                type="text"/>
         <ng-select [items]="listType$ | async"
+                   [(ngModel)]="selectTypePokemon"
+                   (change)="listItems$.next(txtSearch.value)"
                    class="ml-2"
                    style="width: 220px"
                    placeholder="Seleccionar Tipo"
