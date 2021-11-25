@@ -2,12 +2,16 @@
 
   <div class="row mb-3">
     <div class="col-md-12 d-flex justify-content-between align-content-between">
-      <div>
+      <div class="d-flex flex-row">
         <input class="form-control"
                placeholder="Buscar"
                style="width: 220px"
                type="text"/>
-
+        <ng-select [items]="listType$ | async"
+                   class="ml-2"
+                   style="width: 220px"
+                   placeholder="Seleccionar Tipo"
+        ></ng-select>
       </div>
       <div>
         <button class="btn btn-sm btn-warning mr-2"
@@ -36,33 +40,46 @@
       <th class="text-center" scope="col">Defensa</th>
     </tr>
     </thead>
-    <tbody>
-    <tr *ngFor="let pokemon of items; index as i">
-      <td class="text-center">
-        <icofont ico="icofont-edit text-primary mr-2 f-22 cursor-pointer"
-                 ngbTooltip="Editar Registro"
-                 (click)="editar(pokemon)"
-        ></icofont>
-        <icofont ico="icofont-trash text-danger mr-2 f-22 cursor-pointer"
-                 ngbTooltip="Eliminar Registro"
-                 (click)="eliminar(pokemon.id)"
-        ></icofont>
-      </td>
-      <td>
-        {{pokemon.name | titlecase}}
-      </td>
-      <td class="text-center">
-        <img [src]="pokemon.image"
-             class="mr-2"
-             style="width: 40px">
-      </td>
-      <td class="text-center">
-        {{pokemon.attack}}
-      </td>
-      <td class="text-center">
-        {{pokemon.defense}}
-      </td>
-    </tr>
-    </tbody>
+    <ng-container *ngIf="!showLoading;else templateRef">
+      <tbody>
+      <tr *ngFor="let pokemon of items; index as i">
+        <td class="text-center">
+          <icofont ico="icofont-edit text-primary f-22 cursor-pointer"
+                   ngbTooltip="Editar Registro"
+                   (click)="editar(pokemon)"
+          ></icofont>
+          <icofont ico="icofont-trash text-danger ml-3 f-22 cursor-pointer"
+                   ngbTooltip="Eliminar Registro"
+                   (click)="eliminar(pokemon.id)"
+          ></icofont>
+        </td>
+        <td>
+          {{pokemon.name | titlecase}}
+        </td>
+        <td class="text-center">
+          <img [src]="pokemon.image"
+               class="mr-2"
+               (error)="setDefaultPic(pokemon)"
+               style="width: 40px">
+        </td>
+        <td class="text-center">
+          {{pokemon.attack}}
+        </td>
+        <td class="text-center">
+          {{pokemon.defense}}
+        </td>
+      </tr>
+      </tbody>
+    </ng-container>
+
+    <ng-template #templateRef>
+      <tr class="loading">
+        <td colspan="5" class="text-center font-weight-bold">
+          Cargando...
+        </td>
+      </tr>
+    </ng-template>
+
+
   </table>
 </div>

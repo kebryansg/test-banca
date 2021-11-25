@@ -7,6 +7,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
 import {ListadoComponent} from './listado/listado.component';
 import {NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgSelectModule} from "@ng-select/ng-select";
+import {NgxSliderModule} from "@angular-slider/ngx-slider";
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import {NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
     ReactiveFormsModule,
     SharedModule,
     NgbTooltipModule,
+    NgSelectModule,
+    NgxSliderModule,
   ],
   exports: [
     ListadoComponent

@@ -25,7 +25,7 @@ export class CrudService {
     return this.http.put(this.url + api, body || {}, {params: params})
   }
 
-  delete(api: string, body: any, params?: any): Observable<any> {
+  delete(api: string, params?: any): Observable<any> {
     return this.http.delete(this.url + api, {params: params})
   }
 }

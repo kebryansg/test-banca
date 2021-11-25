@@ -12,11 +12,27 @@ export class PokemonService {
   }
 
   getPokemonsByName(filterTerm: string): Observable<Pokemon[]> {
-    return this.crudService.get('')
+    return this.crudService.get('pokemons')
   }
 
   ObtenerPokemons(): Observable<Pokemon[]> {
     return this.crudService.get('', {idAuthor: 1})
+  }
+
+  ObtenerPokemonById(idPokemon: number): Observable<Pokemon> {
+    return this.crudService.get(`pokemons/${idPokemon}`)
+  }
+
+  CrearPokemon(data: Pokemon) {
+    return this.crudService.post(`pokemons`, data)
+  }
+
+  ActualizarPokemon(idPokemon: number, data: Pokemon) {
+    return this.crudService.put(`pokemons/${idPokemon}`, data)
+  }
+
+  EliminarPokemon(idPokemon: number) {
+    return this.crudService.delete(`pokemons/${idPokemon}`)
   }
 
   getTypePokemon(): string[] {
