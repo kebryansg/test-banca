@@ -9,7 +9,13 @@ import {Options} from "@angular-slider/ngx-slider";
 @Component({
   selector: 'app-edit-pokemon',
   templateUrl: './edit-pokemon.component.html',
-  styles: []
+  styles: [`
+    .back-range {
+      background-color: #e9ecef;
+      padding: 10px 10px;
+      border-radius: 10px;
+    }
+  `]
 })
 export class EditPokemonComponent implements OnInit {
   @Input() data: any;

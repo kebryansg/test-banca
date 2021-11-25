@@ -1,14 +1,19 @@
 <div class="container mt-5">
 
-  <div class="row mb-3">
+  <div class="row">
     <div class="col-md-12 d-flex justify-content-between align-content-between">
       <div class="d-flex flex-row">
-        <input class="form-control"
-               #txtSearch
-               placeholder="Buscar"
-               style="width: 220px"
-               (keyup.enter)="keyUpEnter($event)"
-               type="text"/>
+        <div class="form-group mb-0">
+          <input class="form-control"
+                 #txtSearch
+                 placeholder="Buscar"
+                 style="width: 220px"
+                 (keyup.enter)="keyUpEnter($event)"
+                 type="text"/>
+          <span class="help-block text-danger">
+              Presiona ENTER para buscar
+            </span>
+        </div>
         <ng-select [items]="listType$ | async"
                    [(ngModel)]="selectTypePokemon"
                    (change)="listItems$.next(txtSearch.value)"
@@ -20,7 +25,7 @@
       <div>
         <button class="btn btn-sm btn-warning mr-2"
                 style="width: 160px"
-                (click)="listItems$.next()">
+                (click)="listItems$.next(txtSearch.value)">
           <icofont ico="icofont-refresh f-18"></icofont>
           Recargar
         </button>
@@ -39,6 +44,7 @@
     <tr>
       <th class="text-center" scope="col">Opciones</th>
       <th class="text-center" scope="col">Nombre</th>
+      <th class="text-center" scope="col">Tipo</th>
       <th class="text-center" scope="col">Imagen</th>
       <th class="text-center" scope="col">Ataque</th>
       <th class="text-center" scope="col">Defensa</th>
@@ -54,11 +60,14 @@
           ></icofont>
           <icofont ico="icofont-trash text-danger ml-3 f-22 cursor-pointer"
                    ngbTooltip="Eliminar Registro"
-                   (click)="eliminar(pokemon.id)"
+                   (click)="eliminar(pokemon)"
           ></icofont>
         </td>
         <td>
           {{pokemon.name | titlecase}}
+        </td>
+        <td class="text-center font-italic">
+          {{pokemon.type | uppercase}}
         </td>
         <td class="text-center">
           <img [src]="pokemon.image"
@@ -66,10 +75,10 @@
                (error)="setDefaultPic(pokemon)"
                style="width: 40px">
         </td>
-        <td class="text-center">
+        <td class="text-center text-danger font-weight-bold">
           {{pokemon.attack}}
         </td>
-        <td class="text-center">
+        <td class="text-center text-success font-weight-bold">
           {{pokemon.defense}}
         </td>
       </tr>
@@ -78,7 +87,7 @@
 
     <ng-template #templateRef>
       <tr class="loading">
-        <td colspan="5" class="text-center font-weight-bold">
+        <td colspan="6" class="text-center font-weight-bold">
           Cargando...
         </td>
       </tr>

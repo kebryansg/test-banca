@@ -61,12 +61,6 @@ export class ListadoComponent implements OnInit, OnDestroy {
   }
 
   getTypeSearch(search?: string) {
-    // if (this.selectTypePokemon)
-    //   this.pokemonService.ObtenerPokemonByType(this.selectTypePokemon)
-    // else this.pokemonService.getPokemonsByName(search || '')
-
-    console.log('search: ', search)
-
     return from(this.selectTypePokemon ?
       this.pokemonService.ObtenerPokemonByType(this.selectTypePokemon) :
       this.pokemonService.ObtenerPokemons()
@@ -107,14 +101,15 @@ export class ListadoComponent implements OnInit, OnDestroy {
       })
   }
 
-  eliminar(id: number) {
+  eliminar(row: Pokemon) {
     this.notificacionService.showSwalConfirm({
       title: 'Eliminar Registro',
+      text: `Eliminar Pokemon: ${row.name}`,
       confirmButtonText: 'Si, eliminar registro.'
     }).then(resolve => {
       if (!resolve) return
 
-      this.pokemonService.EliminarPokemon(id)
+      this.pokemonService.EliminarPokemon(row.id)
         .subscribe(() => {
           this.notificacionService.showSwalMessage({
             title: 'Operación Exitosa',
