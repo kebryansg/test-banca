@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  ApiURL: 'https://pokemon-pichincha.herokuapp.com/pokemons/',
 };
