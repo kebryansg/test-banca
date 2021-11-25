@@ -21,7 +21,6 @@ import {NotificacionService} from "../../shared/service/notificacion.service";
   `]
 })
 export class ListadoComponent implements OnInit, OnDestroy {
-  title = 'prueba-bpichincha';
 
   items: Pokemon[] = []
   selectTypePokemon: TypePokemon
@@ -47,7 +46,7 @@ export class ListadoComponent implements OnInit, OnDestroy {
         switchMap(search => this.getTypeSearch(search)),
         takeUntil(this.destroy$),
       )
-      .subscribe(listado => {
+      .subscribe((listado: Pokemon[]) => {
         this.items = listado
         this.showLoading = false
       })
